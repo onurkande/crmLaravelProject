@@ -25,8 +25,9 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'profile_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'profile_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif'],
             'desired_role' => ['required', 'string', 'in:admin,sales_consultant,agency'],
+            'terms' => ['required', 'accepted']
         ]);
 
         $data = $request->all();

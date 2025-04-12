@@ -26,6 +26,8 @@ class SiteSettingController extends Controller
             'mail_from_address' => 'required|email',
             'mail_from_name' => 'required',
             'footer_content' => 'nullable|string',
+            'terms_of_use' => 'nullable|string',
+            'maintenance_mode' => 'nullable'
         ]);
 
         $settings = SiteSetting::first() ?? new SiteSetting();
@@ -54,6 +56,8 @@ class SiteSettingController extends Controller
         $settings->mail_from_address = $request->mail_from_address;
         $settings->mail_from_name = $request->mail_from_name;
         $settings->footer_content = $request->footer_content;
+        $settings->terms_of_use = $request->terms_of_use;
+        $settings->maintenance_mode = $request->has('maintenance_mode');
 
         $settings->save();
 

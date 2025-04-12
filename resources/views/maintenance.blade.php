@@ -1,10 +1,6 @@
 @extends('auth.layouts.app')
 
-@section('title', 'Kayıt Başarılı')
-
-@section('head')
-<meta http-equiv="refresh" content="5;url={{ route('login') }}">
-@endsection
+@section('title', 'Bakım Modu')
 
 @section('content')
 <div class="container">
@@ -14,14 +10,14 @@
                 <div class="logo-container">
                     <img src="{{ asset('assets/images/logo.svg') }}" alt="">
                 </div>
-                <h5>Kayıt İşlemi Başarılı!</h5>
+                <h5>Bakım Modu</h5>
             </div>
             <div class="content text-center">
-                <div class="alert alert-success">
-                    <i class="zmdi zmdi-check-circle"></i>
-                    <p>Kaydınız başarıyla oluşturuldu. En kısa sürede sizinle iletişime geçilecektir.</p>
+                <div class="alert alert-warning">
+                    <i class="zmdi zmdi-alert-triangle"></i>
+                    <p>Sitemiz şu anda bakım modunda. Lütfen daha sonra tekrar deneyiniz.</p>
                 </div>
-                <p>Login sayfasına yönlendiriliyorsunuz...</p>
+                <p>Yakında tekrar hizmetinizdeyiz...</p>
             </div>
         </div>
     </div>

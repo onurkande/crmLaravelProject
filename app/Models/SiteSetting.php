@@ -15,5 +15,8 @@ class SiteSetting extends Model
         'mail_encryption',
         'mail_from_address',
         'mail_from_name',
+        'footer_content',
+        'terms_of_use',
+        'maintenance_mode'
     ];
 } 

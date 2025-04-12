@@ -20,7 +20,7 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $request->remember)) {
             $request->session()->regenerate();
 
             if (Auth::user()->user_type === 'admin' || Auth::user()->user_type === 'sales_consultant') {

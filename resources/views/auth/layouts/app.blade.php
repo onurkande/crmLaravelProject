@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/authentication.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/color_skins.css') }}">
+
+    @yield('head')
     @php
         $settings = \App\Models\SiteSetting::first();
     @endphp

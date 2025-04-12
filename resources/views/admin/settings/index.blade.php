@@ -2,6 +2,59 @@
 
 @section('title', 'Site Ayarları')
 
+@section('styles')
+<style>
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 34px;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(26px);
+    }
+</style>
+@endsection
+
 @section('content')
 <div class="block-header">
     <div class="row">
@@ -152,6 +205,36 @@
                             <small class="form-text text-muted">HTML etiketleri kullanabilirsiniz. Örnek: sosyal medya linkleri, iletişim bilgileri vb.</small>
                         </div>
 
+                        <div class="form-group">
+                            <label for="terms_of_use">Kullanım Sözleşmesi</label>
+                            <textarea name="terms_of_use" id="terms_of_use" class="form-control">{{ $settings->terms_of_use }}</textarea>
+                            <small class="form-text text-muted">Kullanım sözleşmesi içeriği. HTML etiketleri kullanabilirsiniz.</small>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="header">
+                                        <h2><strong>Bakım</strong> Modu</h2>
+                                    </div>
+                                    <div class="body">
+                                        <div class="row clearfix">
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="form-group">
+                                                    <label class="switch">
+                                                        <input type="checkbox" name="maintenance_mode" value="1" {{ $settings->maintenance_mode ? 'checked' : '' }}>
+                                                        <span class="slider"></span>
+                                                    </label>
+                                                    <span class="ml-3">Bakım modunu {{ $settings->maintenance_mode ? 'kapatmak' : 'açmak' }} için tıklayın</span>
+                                                    <small class="form-text text-muted d-block mt-2">Bakım modu açıkken sadece admin kullanıcıları siteye erişebilir.</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <button type="submit" class="btn btn-primary mt-4">
                             <i class="zmdi zmdi-save"></i> Ayarları Kaydet
                         </button>
@@ -183,6 +266,29 @@
         })
         .then(editor => {
             // Editor başarıyla yüklendi
+            console.log('Editor yüklendi:', editor);
+        })
+        .catch(error => {
+            console.error('Editor yüklenirken hata oluştu:', error);
+        });
+
+    ClassicEditor
+        .create(document.querySelector('#terms_of_use'), {
+            toolbar: {
+                items: [
+                    'undo', 'redo',
+                    '|', 'heading',
+                    '|', 'bold', 'italic', 'strikethrough', 'underline',
+                    '|', 'bulletedList', 'numberedList',
+                    '|', 'alignment',
+                    '|', 'link', 'blockQuote',
+                    '|', 'removeFormat'
+                ]
+            },
+            language: 'tr',
+            removePlugins: ['CKFinderUploadAdapter', 'CKFinder', 'EasyImage', 'Image', 'ImageCaption', 'ImageStyle', 'ImageToolbar', 'ImageUpload', 'MediaEmbed'],
+        })
+        .then(editor => {
             console.log('Editor yüklendi:', editor);
         })
         .catch(error => {

@@ -88,16 +88,43 @@
                     </div>
                 </div>
                 <div class="checkbox">
-                    <input id="terms" type="checkbox" required>
+                    <input id="terms" name="terms" type="checkbox">
                     <label for="terms">
-                        Kullanım Sözleşmesini okudum ve kabul ediyorum <a href="javascript:void(0);">Kullanım Sözleşmesi</a>
+                        Kullanım Sözleşmesini okudum ve kabul ediyorum <a href="javascript:void(0);" data-toggle="modal" data-target="#termsModal">Kullanım Sözleşmesi</a>
                     </label>
+                    @error('terms')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="footer text-center">
                     <button type="submit" class="btn l-cyan btn-round btn-lg btn-block waves-effect waves-light">Kayıt Ol</button>
                     <h6 class="m-t-20"><a class="link" href="{{ route('login') }}">Zaten bir üye misiniz?</a></h6>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<!-- Terms of Use Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="termsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="termsModalLabel">Kullanım Sözleşmesi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="color: initial;">
+                @if($settings && $settings->terms_of_use)
+                    {!! $settings->terms_of_use !!}
+                @else
+                    <p>Kullanım sözleşmesi henüz tanımlanmamış.</p>
+                @endif
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+            </div>
         </div>
     </div>
 </div>
